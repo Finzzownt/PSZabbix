@@ -11,7 +11,7 @@ function Invoke-PostUrl {
         # Parameters for the method
         [hashtable]$Parameters = @{},
 
-        [int]$Id = 1
+        [int]$RequestId = 1
     )
 
     Write-Verbose "method: $Method"
@@ -20,7 +20,7 @@ function Invoke-PostUrl {
         method = $Method
         params = $Parameters
         auth = $script:apikey
-        id = $Id
+        id = $RequestId
     }
 
     if ($Method -eq "apiinfo.version") {
@@ -32,7 +32,7 @@ function Invoke-PostUrl {
         Method = "POST"
         Uri =  $Url
         Body = ($body | ConvertTo-Json)
-        ContentType = "application/json"
+        ContentType = "application/json-rpc"
     }
 
     $result = Invoke-RestMethod @parameters
